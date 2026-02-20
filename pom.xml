@@ -1,0 +1,6 @@
+<!DOCTYPE dependency SYSTEM "pom.dtd">
+<dependency>
+    <groupId>com.jtattoo</groupId>
+    <artifactId>JTattoo</artifactId>
+    <version>1.6.12</version>
+</dependency>
