@@ -8,9 +8,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Build step (optional — add your build commands here)
+      # - name: Build
+      #   run: |
+      #     echo "Run your build commands here"
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v6.0.0
@@ -26,6 +32,7 @@ jobs:
       - name: Nightly Release
         uses: andelf/nightly-release@v1
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           tag_name: nightly
           name: Nightly Release @ $$
           body: "Automated nightly release"
