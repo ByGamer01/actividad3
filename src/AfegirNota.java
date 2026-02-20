@@ -48,8 +48,8 @@ public class AfegirNota extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        String asignatura = (String) txtAsignatura.getSelectedItem();
-        String notaText = txtNotas.getText().trim();
+        String asignatura = (String) txtAsignatura.getSelectedItem(); // Obtenemos la asignatura elegida de nuestro combobox
+        String notaText = txtNotas.getText().trim(); // Obtenemos la nota que ha puesto el usuario, y sin espacios
     }
 
     public static void main(String[] args) {
