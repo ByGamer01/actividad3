@@ -69,7 +69,7 @@ public class CalcularMitjana extends JFrame {
         panel.add(lblGlobal);
 
         // Mostrar aprovat o suspes
-        String resultat = mitjanaGlobal >= 5 ? "APROVAT ✓" : "SUSPES ✗";
+        String resultat = mitjanaGlobal >= 5 ? "APROVAT" : "SUSPES";
         Color colorResultat = mitjanaGlobal >= 5 ? new Color(0, 128, 0) : Color.RED;
 
         JLabel lblResultat = new JLabel(resultat);

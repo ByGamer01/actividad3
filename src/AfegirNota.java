@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -11,16 +10,13 @@ import javax.swing.*;
 
 public class AfegirNota extends JFrame implements ActionListener {
     private JTextField txtNotas;
-    private JComboBox<String> txtAsignatura; // Atributos para poder usar en los botones
-    private ArrayList<HashMap<String, String>> llistaNotas; // Asignaturas key-valor
+    private JComboBox<String> txtAsignatura;
+    private ArrayList<HashMap<String, String>> llistaNotas;
 
-
-    // Funcionalidad Afegir Nota: Permetre afegir una nota d’un estudiant.
     public AfegirNota() {
-        llistaNotas = new ArrayList<>(); // Inicializamos el arraylist
+        llistaNotas = new ArrayList<>(); // FIX: inicializar la lista
 
-
-        this.setTitle("Calculador de Notes");
+        this.setTitle("Calculador de Notes - Afegir Nota");
         this.setLayout(new BorderLayout());
         this.setBackground(Color.CYAN);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,11 +25,12 @@ public class AfegirNota extends JFrame implements ActionListener {
 
         JPanel agregarNotas = new JPanel();
         this.add(agregarNotas);
-        agregarNotas.setLayout(new FlowLayout()); // Este layout me gusta mucho usarlo, solamente si luego le pongo un this.pack(); o, pack();
+        agregarNotas.setLayout(new FlowLayout());
 
         JLabel lblAsignaturas = new JLabel("Asignatura: ");
-        txtAsignatura = new JComboBox<>( // Variable local eliminada, sino nunca se cambia su valor
-                new String[] { "Matematicas", "Castellano", "Ingles", "Catalan" });
+        // FIX: asignar al atributo de clase, no a una variable local
+        txtAsignatura = new JComboBox<>(
+                new String[] { "Matematiques", "Castella", "Angles", "Catala" });
 
         agregarNotas.add(lblAsignaturas);
         agregarNotas.add(txtAsignatura);
@@ -43,11 +40,19 @@ public class AfegirNota extends JFrame implements ActionListener {
         agregarNotas.add(lblNotas);
         agregarNotas.add(txtNotas);
 
-        JButton botonAgregarNota = new JButton("Pulsa Aqui"); // Boton donde el usuario si presiona comienza la logica.
-        agregarNotas.add(new JLabel());
+        JButton botonAgregarNota = new JButton("Afegir Nota");
         agregarNotas.add(botonAgregarNota);
-
         botonAgregarNota.addActionListener(this);
+
+        JButton botonCalcular = new JButton("Calcular Mitjana");
+        agregarNotas.add(botonCalcular);
+        botonCalcular.addActionListener(e -> {
+            if (llistaNotas.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hi ha notes per calcular!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                new CalcularMitjana(llistaNotas);
+            }
+        });
 
         this.pack();
         this.setVisible(true);
@@ -60,12 +65,12 @@ public class AfegirNota extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        String asignatura = (String) txtAsignatura.getSelectedItem(); // Obtenemos la asignatura elegida de nuestro combobox
-        String notaText = txtNotas.getText().trim(); // Obtenemos la nota que ha puesto el usuario, y sin espacios
+        String asignatura = (String) txtAsignatura.getSelectedItem();
+        String notaText = txtNotas.getText().trim();
 
-        if (notaText.isEmpty()) { // Si la string de las notas esta vacia, sale un aviso y/o error especificando que ponga una nota
+        if (notaText.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Introdueix una nota!", "Error", JOptionPane.ERROR_MESSAGE);
-            return; // Y regresa, porque sino se queda en iteración todo el rato
+            return;
         }
 
         try {
@@ -76,19 +81,19 @@ public class AfegirNota extends JFrame implements ActionListener {
                 return;
             }
 
-            HashMap<String, String> entrada = new HashMap<>(); // HashMap debido a que lo utilizamos en otra actividad de Programacion; para juntar la asignatura con su bvalor
-            entrada.put("asignatura", asignatura); // Introduccimos en el primer puesto, la asignatura y la que elija el usuario
-            entrada.put("nota", String.valueOf(nota)); // la nota ira vinculada con la nota que haya introducido el usuario
-            llistaNotas.add(entrada); // lo añadimos a la lista global (otro hashmap) valor = asignaturas ; key = notas
+            HashMap<String, String> entrada = new HashMap<>();
+            entrada.put("asignatura", asignatura);
+            entrada.put("nota", String.valueOf(nota));
+            llistaNotas.add(entrada);
 
             JOptionPane.showMessageDialog(this,
                     "Nota afegida!\nAsignatura: " + asignatura + "\nNota: " + nota,
-                    "Correcte", JOptionPane.INFORMATION_MESSAGE); // Mostramos un mensaje de que el usuario lo ha entregado con exito
+                    "Correcte", JOptionPane.INFORMATION_MESSAGE);
 
-            txtNotas.setText(""); // Y volvemos a resetear el valor del textfield
+            txtNotas.setText("");
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "La nota ha de ser un número vàlid.", "Error", JOptionPane.ERROR_MESSAGE);
-        } // ponemos un catch por si hay errores, o por si el usuario pone una letra en vez de un numero, si es asi, se le pondra un 
+            JOptionPane.showMessageDialog(this, "La nota ha de ser un numero valid.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
