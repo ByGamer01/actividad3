@@ -1,7 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class CalcularMitjana {
+public class CalcularMitjana extends JFrame {
     public CalcularMitjana(){
         this.setTitle("Calcular Mitjana");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
