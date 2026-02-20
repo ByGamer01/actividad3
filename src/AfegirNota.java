@@ -8,6 +8,8 @@ import javax.swing.*;
 
 public class AfegirNota extends JFrame implements ActionListener {
     private JLabel lblNotas;
+    private JTextField txtNotas;
+    private JComboBox<String> txtAsignatura; // Atributos para poder usar en los botones
 
     // Funcionalidad Afegir Nota: Permetre afegir una nota d’un estudiant.
     public AfegirNota() {
@@ -30,7 +32,7 @@ public class AfegirNota extends JFrame implements ActionListener {
         agregarNotas.add(txtAsignatura);
 
         JLabel lblNotas = new JLabel("Nota: ");
-        JTextField txtNotas = new JTextField(10);
+        txtNotas = new JTextField(10);
         agregarNotas.add(lblNotas);
         agregarNotas.add(txtNotas);
 
@@ -46,8 +48,8 @@ public class AfegirNota extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent evt) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        String asignatura = (String) txtAsignatura.getSelectedItem();
+        String notaText = txtNotas.getText().trim();
     }
 
     public static void main(String[] args) {
