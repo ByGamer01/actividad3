@@ -1,18 +1,18 @@
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-public class CalcularMitjana extends JFrame {
+import java.awt.Event;
+import java.awt.event.ActionEvent;
+public class CalcularMitjana extends JPanel implements ActionListener{
     public CalcularMitjana(){
         this.setTitle("Calcular Mitjana");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(200, 400);
         setLocationRelativeTo(null);
         setDefaultLookAndFeelDecorated(true);
-        JLabel lblMostrarResultat = new JLabel("Calcular Mitjana");
-        lblMostrarResultat.setText(nota);
-        lblMostrarResultat.setHorizontalAlignment(JLabel.CENTER);
-        lblMostrarResultat.setFont(new java.awt.Font("Serif", java.awt.Font.BOLD, 40)); //Canviam la font i el tamany de la lletra.
-        this.add(lblMostrarResultat);
         this.setVisible(true);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
     }
 }
