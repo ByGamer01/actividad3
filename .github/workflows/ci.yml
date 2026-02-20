@@ -1,0 +1,33 @@
+name: Build and Release
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: my-artifact
+          path: ./build/
+          if-no-files-found: warn
+          retention-days: 7
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
+
+      - name: Nightly Release
+        uses: andelf/nightly-release@v1
+        with:
+          tag_name: nightly
+          name: Nightly Release @ $$
+          body: "Automated nightly release"
+          prerelease: true
+          files: "./build/*"
