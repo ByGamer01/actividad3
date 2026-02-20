@@ -17,6 +17,9 @@ public class AfegirNota extends JFrame implements ActionListener {
 
     // Funcionalidad Afegir Nota: Permetre afegir una nota d’un estudiant.
     public AfegirNota() {
+        llistaNotas = new ArrayList<>(); // Inicializamos el arraylist
+
+
         this.setTitle("Calculador de Notes");
         this.setLayout(new BorderLayout());
         this.setBackground(Color.CYAN);
@@ -29,7 +32,7 @@ public class AfegirNota extends JFrame implements ActionListener {
         agregarNotas.setLayout(new FlowLayout()); // Este layout me gusta mucho usarlo, solamente si luego le pongo un this.pack(); o, pack();
 
         JLabel lblAsignaturas = new JLabel("Asignatura: ");
-        JComboBox<String> txtAsignatura = new JComboBox<>(
+        txtAsignatura = new JComboBox<>( // Variable local eliminada, sino nunca se cambia su valor
                 new String[] { "Matematicas", "Castellano", "Ingles", "Catalan" });
 
         agregarNotas.add(lblAsignaturas);
@@ -48,6 +51,11 @@ public class AfegirNota extends JFrame implements ActionListener {
 
         this.pack();
         this.setVisible(true);
+    }
+
+    // Getter para que otras clases puedan acceder a la lista de notas
+    public ArrayList<HashMap<String, String>> getLlistaNotas() {
+        return llistaNotas;
     }
 
     @Override
